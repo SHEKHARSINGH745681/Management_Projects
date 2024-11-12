@@ -1,5 +1,6 @@
 ﻿using System;
 using Book_Management.Data;
+using Book_Management.Exceptions;
 using Book_Management.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,11 +43,24 @@ namespace Book_Management.Controllers
         [HttpPost]
         public async Task<ActionResult<Book>> PostBook(Book book)
         {
+            // Validate the incoming model
+            if (!ModelState.IsValid)
+            {
+                var errorResponse = new ErrorResponse
+                {
+                    StatusCode = 400,
+                    Title = "Bad Request",
+                    ExceptionMessage = "Please fill out the data correctly."
+                };
 
+                return BadRequest(errorResponse);
+            }
+            else
+            // Add the book to the DbContext
             DbContext.Books.Add(book);
             await DbContext.SaveChangesAsync();
 
-            return Ok();
+            return Ok(book);
         }
 
         //UPDATE
