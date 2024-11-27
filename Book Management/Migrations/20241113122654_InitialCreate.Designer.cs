@@ -3,6 +3,7 @@ using System;
 using Book_Management.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Book_Management.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241113122654_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,14 +35,6 @@ namespace Book_Management.Migrations
 
                     b.Property<string>("Author")
                         .IsRequired()
-<<<<<<< HEAD
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("character varying(15)");
-=======
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
@@ -47,19 +42,14 @@ namespace Book_Management.Migrations
                         .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("character varying(13)");
->>>>>>> origin/main
 
                     b.Property<DateTime>("PublishedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Title")
                         .IsRequired()
-<<<<<<< HEAD
-                        .HasColumnType("text");
-=======
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
->>>>>>> origin/main
 
                     b.Property<decimal>("price")
                         .HasColumnType("numeric");
@@ -68,8 +58,6 @@ namespace Book_Management.Migrations
 
                     b.ToTable("Books");
                 });
-<<<<<<< HEAD
-=======
 
             modelBuilder.Entity("Book_Management.Models.LoginModel", b =>
                 {
@@ -355,7 +343,6 @@ namespace Book_Management.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
->>>>>>> origin/main
 #pragma warning restore 612, 618
         }
     }
